@@ -25,6 +25,53 @@
         transition: opacity 0.3s ease;
       }
     </style>
+    <!-- detaill product -->
+    <style>
+      /* Product Carousel Styles */
+      #productCarousel {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      #productCarousel .carousel-item img {
+        object-fit: cover;
+        height: 400px;
+        width: 100%;
+      }
+
+      #productCarousel .carousel-indicators {
+        margin-bottom: 0;
+      }
+
+      #productCarousel .carousel-indicators button {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--gold);
+      }
+
+      .cursor-pointer {
+        cursor: pointer;
+      }
+
+      .thumbnail {
+        opacity: 0.6;
+        transition: opacity 0.3s ease;
+      }
+
+      .thumbnail:hover,
+      .thumbnail.active {
+        opacity: 1;
+      }
+
+      /* Mobile Responsive Adjustments */
+      @media (max-width: 768px) {
+        #productCarousel .carousel-item img {
+          height: 300px;
+        }
+      }
+    </style>
     <style>
       /* ... [previous styles] ... */
 
@@ -122,94 +169,99 @@
       }
     </style>
     <style>
-    /* Navbar Styles */
-    .navbar {
+      /* Navbar Styles */
+      .navbar {
         transition: all 0.3s ease;
         padding: 1rem 0;
         background-color: rgba(255, 255, 255, 0.95);
-    }
+      }
 
-    .navbar.navbar-scrolled {
+      .navbar.navbar-scrolled {
         padding: 0.5rem 0;
         background-color: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(10px);
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
 
-    .navbar-brand img {
+      .navbar-brand img {
         height: 50px;
         transition: all 0.3s ease;
-    }
+      }
 
-    .navbar.navbar-scrolled .navbar-brand img {
+      .navbar.navbar-scrolled .navbar-brand img {
         height: 40px;
-    }
+      }
 
-    /* Mobile Menu Styles */
-    @media (max-width: 991.98px) {
+      /* Mobile Menu Styles */
+      @media (max-width: 991.98px) {
         .navbar-collapse {
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 1rem;
-            border-radius: 10px;
-            margin-top: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+          background-color: rgba(255, 255, 255, 0.95);
+          padding: 1rem;
+          border-radius: 10px;
+          margin-top: 0.5rem;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .navbar.navbar-scrolled .navbar-collapse {
-            background-color: rgba(255, 255, 255, 0.9);
+          background-color: rgba(255, 255, 255, 0.9);
         }
 
         .navbar-toggler {
-            padding: 0.25rem 0.5rem;
-            font-size: 1rem;
-            border: none;
-            outline: none !important;
+          padding: 0.25rem 0.5rem;
+          font-size: 1rem;
+          border: none;
+          outline: none !important;
         }
 
         .navbar-toggler:focus {
-            box-shadow: none;
+          box-shadow: none;
         }
 
         .nav-link {
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: all 0.3s ease;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          transition: all 0.3s ease;
         }
 
         .nav-link:hover {
-            background-color: var(--gold);
-            color: white !important;
+          background-color: var(--gold);
+          color: white !important;
         }
-    }
-</style>
+      }
+    </style>
   </head>
   <body>
-   <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
         <a class="navbar-brand" href="#">
-            <img src="/api/placeholder/150/50" alt="Zawaya Logo">
+          <img src="images/zawaya.png" alt="Zawaya Logo" />
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#home">Beranda</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#why-us">Mengapa Kami</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#products">Produk</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#testimonials">Testimoni</a>
-                </li>
-            </ul>
+          <ul class="navbar-nav ms-auto">
+            <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Beranda</a>
+                </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="#why-us">Mengapa Kami</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#products">Produk</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#testimonials">Testimoni</a>
+            </li>
+          </ul>
         </div>
-    </div>
-</nav>
+      </div>
+    </nav>
 
     <div
       id="heroCarousel"
@@ -327,7 +379,7 @@
           <div class="col-md-4">
             <div class="text-center">
               <i class="fas fa-shipping-fast text-gold fa-3x mb-3"></i>
-              <h4>Pengiriman Cepat</h4>
+              <h4>Bisa COD seluruh Indonesia</h4>
               <p>Dikirim langsung ke rumah Anda dengan packaging aman</p>
             </div>
           </div>
@@ -522,7 +574,7 @@
                     </div>
                     <div class="col-4">
                       <img
-                        src="images/ajwa3.png"
+                        src="images/ajwa5.png"
                         class="img-fluid"
                         alt="Kurma Ajwa 3"
                       />
@@ -531,31 +583,27 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <h4 class="mb-3">Detail Produk</h4>
+                <!-- <h4 class="mb-3">Detail Produk</h4> -->
                 <p>
-                  Kurma Ajwa premium langsung dari Madinah dengan kualitas
-                  terbaik. Memiliki tekstur lembut dan rasa manis yang pas.
+                  Kurma Ajwa, yang juga dikenal sebagai "Kurma Nabi," sangat
+                  istimewa bagi umat Muslim karena direkomendasikan langsung
+                  oleh Nabi Muhammad ﷺ. Kurma ini menjadi pilihan favorit karena
+                  memiliki nilai sejarah dan manfaat kesehatan yang luar biasa.
+                  Nabi Muhammad ﷺ bersabda: "Barangsiapa mengonsumsi tujuh butir
+                  kurma Ajwa di pagi hari, maka pada hari itu ia tidak akan
+                  terkena racun maupun sihir." (HR. Bukhari dan Muslim).
                 </p>
 
                 <div class="mb-4">
-                  <h5>Manfaat dan Khasiat Kurma Ajwa</h5>
+                  <h5>Manfaat dan Khasiat Kurma Ajwa:</h5>
                   <ul>
+                    <li>Sesuai hadits Nabi, konsumsi kurma Ajwa dapat melindungi dari racun dan sihir.</li>
                     <li>
-                      Mempercepat Pemulihan: Kurma Ajwa membantu tubuh pulih
-                      lebih cepat setelah sakit.
+                      Kurma Ajwa membantu tubuh pulih lebih cepat setelah sakit.
                     </li>
+                    <li>Buah ini sangat baik untuk mendukung kesehatan reproduksi.</li>
                     <li>
-                      Penawar Racun dan Sihir: Sesuai hadis Nabi, konsumsi kurma
-                      Ajwa dapat melindungi dari racun dan sihir.
-                    </li>
-                    <li>
-                      Meningkatkan Kesuburan: Buah ini sangat baik untuk
-                      mendukung kesehatan reproduksi.
-                    </li>
-                    <li>
-                      Manfaat untuk Ibu Hamil dan Menyusui: Kurma Ajwa membantu
-                      memenuhi kebutuhan nutrisi ibu hamil dan memperlancar
-                      produksi ASI.
+                      Kurma Ajwa membantu memenuhi kebutuhan nutrisi ibu hamil dan memperlancar produksi ASI.
                     </li>
                   </ul>
                 </div>
@@ -638,7 +686,7 @@
                     </div>
                     <div class="col-4">
                       <img
-                        src="images/shoidi1.png"
+                        src="images/shoidi3.png"
                         class="img-fluid"
                         alt="Kurma Shoidi 3"
                       />
@@ -647,7 +695,7 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <h4 class="mb-3">Detail Produk</h4>
+                <!-- <h4 class="mb-3">Detail Produk</h4> -->
                 <p>
                   Kurma Shoidi dikenal luas karena kualitasnya yang baik dan
                   sering dikemas secara praktis, menjadikannya pilihan yang
@@ -690,7 +738,7 @@
 
                   <!-- Button untuk ukuran 500gr (awalnya tersembunyi) -->
                   <a
-                    href="https://zawayakurma.orderonline.id/kurma-shoidi-kurma-premium-shoidi-asli-manis-dan-lembut"
+                    href="https://zawayakurma.orderonline.id/kurma-shoidi-400g"
                     class="btn btn-gold w-100 mb-2 d-none"
                     id="btn600"
                   >
@@ -761,7 +809,7 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <h4 class="mb-3">Detail Produk</h4>
+                <!-- <h4 class="mb-3">Detail Produk</h4> -->
                 <p>
                   Kurma Medjool adalah salah satu jenis kurma premium terbaik
                   yang telah dikenal di seluruh dunia. Kurma ini tumbuh subur di
@@ -880,7 +928,7 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <h4 class="mb-3">Detail Produk</h4>
+                <!-- <h4 class="mb-3">Detail Produk</h4> -->
                 <p>
                   Kurma Sukari, yang dikenal juga sebagai "Kurma Raja,"
                   merupakan salah satu jenis kurma yang sangat populer dan
@@ -1076,7 +1124,7 @@
                 class="text-white me-3"
                 ><i class="fab fa-facebook fa-lg"></i
               ></a>
-              <a href="wa.me/6289669793046" class="text-white me-3"
+              <a href="https://wa.me/6289669793046" class="text-white me-3"
                 ><i class="fab fa-whatsapp fa-lg"></i
               ></a>
             </div>
@@ -1094,6 +1142,31 @@
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <!-- detail product -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Handle thumbnail clicks
+        const thumbnails = document.querySelectorAll(".thumbnail");
+        thumbnails.forEach((thumb) => {
+          thumb.addEventListener("click", function () {
+            // Remove active class from all thumbnails
+            thumbnails.forEach((t) => t.classList.remove("active"));
+            // Add active class to clicked thumbnail
+            this.classList.add("active");
+          });
+        });
+
+        // Update thumbnail active state when carousel slides
+        const productCarousel = document.getElementById("productCarousel");
+        productCarousel.addEventListener("slid.bs.carousel", function (event) {
+          // Remove active class from all thumbnails
+          thumbnails.forEach((t) => t.classList.remove("active"));
+          // Add active class to current thumbnail
+          thumbnails[event.to].classList.add("active");
+        });
+      });
+    </script>
 
     <!-- Countdown Script -->
     <script>
@@ -1211,47 +1284,47 @@
         });
     </script>
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const navbar = document.querySelector('.navbar');
-    const navbarCollapse = document.querySelector('.navbar-collapse');
-    const navbarToggler = document.querySelector('.navbar-toggler');
-    
-    // Handle scroll
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            navbar.classList.add('navbar-scrolled');
-        } else {
-            navbar.classList.remove('navbar-scrolled');
-        }
-    });
+      document.addEventListener("DOMContentLoaded", function () {
+        const navbar = document.querySelector(".navbar");
+        const navbarCollapse = document.querySelector(".navbar-collapse");
+        const navbarToggler = document.querySelector(".navbar-toggler");
 
-    // Close mobile menu on click
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navbarCollapse.classList.contains('show')) {
-                navbarToggler.click();
-            }
+        // Handle scroll
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 50) {
+            navbar.classList.add("navbar-scrolled");
+          } else {
+            navbar.classList.remove("navbar-scrolled");
+          }
         });
-    });
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        // Close mobile menu on click
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          link.addEventListener("click", () => {
+            if (navbarCollapse.classList.contains("show")) {
+              navbarToggler.click();
+            }
+          });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const target = document.querySelector(this.getAttribute("href"));
             if (target) {
-                const headerOffset = 70;
-                const elementPosition = target.offsetTop;
-                const offsetPosition = elementPosition - headerOffset;
+              const headerOffset = 70;
+              const elementPosition = target.offsetTop;
+              const offsetPosition = elementPosition - headerOffset;
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth",
+              });
             }
+          });
         });
-    });
-});
-</script>
+      });
+    </script>
   </body>
 </html>
