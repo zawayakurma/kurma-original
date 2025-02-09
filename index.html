@@ -1,1119 +1,394 @@
 <!DOCTYPE html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zawaya Kurma Premium</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <style>
-      .btn.disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        pointer-events: none;
-      }
-
-      .btn.active {
-        opacity: 1;
-        pointer-events: auto;
-        transition: opacity 0.3s ease;
-      }
-    </style>
-    <!-- detaill product -->
-    <style>
-      /* Product Carousel Styles */
-      #productCarousel {
-        background-color: #f8f9fa;
-        border-radius: 10px;
-        overflow: hidden;
-      }
-
-      #productCarousel .carousel-item img {
-        object-fit: cover;
-        height: 400px;
-        width: 100%;
-      }
-
-      #productCarousel .carousel-indicators {
-        margin-bottom: 0;
-      }
-
-      #productCarousel .carousel-indicators button {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: var(--gold);
-      }
-
-      .cursor-pointer {
-        cursor: pointer;
-      }
-
-      .thumbnail {
-        opacity: 0.6;
-        transition: opacity 0.3s ease;
-      }
-
-      .thumbnail:hover,
-      .thumbnail.active {
-        opacity: 1;
-      }
-
-      /* Mobile Responsive Adjustments */
-      @media (max-width: 768px) {
-        #productCarousel .carousel-item img {
-          height: 300px;
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zawaya Kurma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            100: '#FFF9E6',
+                            600: '#D4AF37',
+                            800: '#B8860B',
+                            900: '#8B6914'
+                        }
+                    }
+                }
+            }
         }
-      }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .nav-hidden {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .carousel-item {
+            transition: opacity 1s ease-in-out;
+        }
+
+        .gold-gradient {
+            background: linear-gradient(45deg, #D4AF37 0%, #B8860B 100%);
+        }
+
+        .gold-border {
+            border: 2px solid #D4AF37;
+        }
+
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s;
+        }
+
+        .section-show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
     </style>
     <style>
-      /* ... [previous styles] ... */
+    html {
+        scroll-behavior: smooth;  /* Membuat scroll halus */
+        scroll-padding-top: 10px; /* Mengatur offset untuk navbar fixed */
+    }
+</style>
+</head>
+<body class="bg-gold-100">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 nav-hidden transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-2xl font-bold text-gold-900 flex items-center">
+                    <img src="zawaya.png" 
+                        alt="logo">
+                    
+                </a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gold-900 hover:text-gold-600">Home</a>
+                    <a href="#products" class="text-gold-900 hover:text-gold-600">Products</a>
+                    <a href="#reviews" class="text-gold-900 hover:text-gold-600">Reviews</a>
+                </div>
 
-      .carousel-item {
-        height: 80vh;
-        background-position: center;
-        background-size: cover;
-        position: relative;
-      }
-
-      .carousel-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .carousel-caption {
-        position: static;
-        padding: 0 20px;
-      }
-
-      /* Membuat indikator carousel lebih menonjol */
-      .carousel-indicators button {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        margin: 0 6px;
-        background-color: var(--gold);
-      }
-    </style>
-    <style>
-      :root {
-        --gold: #d4af37;
-        --dark-gold: #b4943e;
-      }
-
-      .text-gold {
-        color: var(--gold);
-      }
-
-      .bg-gold {
-        background-color: var(--gold);
-      }
-
-      .btn-gold {
-        background-color: var(--gold);
-        color: white;
-        border: none;
-      }
-
-      .btn-gold:hover {
-        background-color: var(--dark-gold);
-        color: white;
-      }
-
-      .navbar {
-        background-color: white;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      .hero-section {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-          url("/api/placeholder/1920/1080");
-        background-size: cover;
-        background-position: center;
-        min-height: 80vh;
-        display: flex;
-        align-items: center;
-      }
-
-      .card {
-        transition: transform 0.3s;
-      }
-
-      .card:hover {
-        transform: translateY(-5px);
-      }
-
-      .testimonial-card {
-        background: #fff;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      .star-rating {
-        color: #ffd700;
-      }
-    </style>
-    <style>
-      /* Navbar Styles */
-      .navbar {
-        transition: all 0.3s ease;
-        padding: 1rem 0;
-        background-color: rgba(255, 255, 255, 0.95);
-      }
-
-      .navbar.navbar-scrolled {
-        padding: 0.5rem 0;
-        background-color: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .navbar-brand img {
-        height: 50px;
-        transition: all 0.3s ease;
-      }
-
-      .navbar.navbar-scrolled .navbar-brand img {
-        height: 40px;
-      }
-
-      /* Mobile Menu Styles */
-      @media (max-width: 991.98px) {
-        .navbar-collapse {
-          background-color: rgba(255, 255, 255, 0.95);
-          padding: 1rem;
-          border-radius: 10px;
-          margin-top: 0.5rem;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar.navbar-scrolled .navbar-collapse {
-          background-color: rgba(255, 255, 255, 0.9);
-        }
-
-        .navbar-toggler {
-          padding: 0.25rem 0.5rem;
-          font-size: 1rem;
-          border: none;
-          outline: none !important;
-        }
-
-        .navbar-toggler:focus {
-          box-shadow: none;
-        }
-
-        .nav-link {
-          padding: 0.5rem 1rem;
-          border-radius: 5px;
-          transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-          background-color: var(--gold);
-          color: white !important;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="images/zawaya.png" alt="Zawaya Logo" />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">Beranda</a>
-                </li> -->
-            <li class="nav-item">
-              <a class="nav-link" href="#why-us">Mengapa Kami</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#products">Produk</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#testimonials">Testimoni</a>
-            </li>
-          </ul>
+                <button id="menu-btn" class="md:hidden text-gold-900">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
         </div>
-      </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden absolute w-full bg-white shadow-lg hidden" id="mobile-menu">
+            <a href="#home" class="block px-6 py-2 text-gold-900 hover:bg-gold-100">Home</a>
+            <a href="#products" class="block px-6 py-2 text-gold-900 hover:bg-gold-100">Products</a>
+            <a href="#reviews" class="block px-6 py-2 text-gold-900 hover:bg-gold-100">Reviews</a>
+        </div>
     </nav>
 
-    <div
-      id="heroCarousel"
-      class="carousel slide carousel-fade"
-      data-bs-ride="carousel"
-    >
-      <div class="carousel-indicators">
-        <button
-          type="button"
-          data-bs-target="#heroCarousel"
-          data-bs-slide-to="0"
-          class="active"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#heroCarousel"
-          data-bs-slide-to="1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#heroCarousel"
-          data-bs-slide-to="2"
-        ></button>
-      </div>
-
-      <div class="carousel-inner">
-        <div
-          class="carousel-item active"
-          style="background-image: url('images/banner.png ')"
-        >
-          <div class="carousel-overlay">
-            <div class="carousel-caption text-center">
-              <h1 class="display-3 fw-bold mb-4">Kurma Premium Berkualitas</h1>
-              <p class="lead mb-4">
-                Nikmati kelezatan kurma premium pilihan langsung dari sumber
-                terbaik
-              </p>
-              <a href="#products" class="btn btn-gold btn-lg">Lihat Produk</a>
+    <!-- Hero Carousel -->
+    <section class="relative min-h-screen overflow-hidden" id="home">
+        <div class="carousel-item active absolute inset-0">
+            <img src="sukari.png" 
+                 class="w-full h-full object-cover" 
+                 alt="Kurma 1">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                <div class="text-center text-white px-4">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 text-gold-600">100% Kurma Original</h1>
+                    <p class="text-xl md:text-2xl mb-8">Tanpa tambahan gula buatan</p>
+                    <!-- <a href="#products" class="gold-border px-8 py-3 text-gold-600 hover:bg-gold-600 hover:text-white transition-all">
+                        Explore Collection
+                    </a> -->
+                </div>
             </div>
-          </div>
         </div>
 
-        <div
-          class="carousel-item"
-          style="background-image: url('images/2.png')"
-        >
-          <div class="carousel-overlay">
-            <div class="carousel-caption text-center">
-              <h1 class="display-3 fw-bold mb-4">100% Original & Fresh</h1>
-              <p class="lead mb-4">
-                Dipanen langsung tahun ini untuk menjaga kualitas terbaik
-              </p>
-              <a href="#why-us" class="btn btn-gold btn-lg">Mengapa Kami</a>
+        <div class="carousel-item hidden absolute inset-0">
+            <img src="medjool.png" 
+                 class="w-full h-full object-cover" 
+                 alt="Kurma 2">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                <div class="text-center text-white px-4">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 text-gold-600">Produk Asli Palestina (Medjool)</h1>
+                    <p class="text-xl md:text-2xl mb-8">Bekerja sama dengan Palestine Date Company <br> yang ada di tepi barat Palestina (West Bank)</p>
+                    <!-- <a href="#products" class="gold-border px-8 py-3 text-gold-600 hover:bg-gold-600 hover:text-white transition-all">
+                        Explore Collection
+                    </a> -->
+                </div>
             </div>
-          </div>
         </div>
 
-        <div
-          class="carousel-item"
-          style="background-image: url('images/1.png')"
-        >
-          <div class="carousel-overlay">
-            <div class="carousel-caption text-center">
-              <h1 class="display-3 fw-bold mb-4">Promo Spesial 10% Off</h1>
-              <p class="lead mb-4">
-                Dapatkan diskon spesial untuk pembelian hari ini
-              </p>
-              <a href="#products" class="btn btn-gold btn-lg">Beli Sekarang</a>
+        <div class="carousel-item hidden absolute inset-0">
+            <img src="soidi.png" 
+                 class="w-full h-full object-cover" 
+                 alt="Kurma 3">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                <div class="text-center text-white px-4">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 text-gold-600">Kualitas Premium</h1>
+                    <p class="text-xl md:text-2xl mb-8">Bekerja sama dengan perusahaan negara setempat -- atau dengan petaninya agar kurma yang kami jual Original dan Berkualitas!</p>
+                    <!-- <a href="#products" class="gold-border px-8 py-3 text-gold-600 hover:bg-gold-600 hover:text-white transition-all">
+                        Explore Collection
+                    </a> -->
+                </div>
             </div>
-          </div>
         </div>
-      </div>
 
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#heroCarousel"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#heroCarousel"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
+        <!-- Navigation Controls -->
+        <button id="prevSlide" class="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-4xl">
+            ❮
+        </button>
+        <button id="nextSlide" class="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-4xl">
+            ❯
+        </button>
 
-    <!-- Why Choose Us -->
-    <section class="py-5" id="why-us">
-      <div class="container">
-        <h2 class="text-center mb-5">
-          Mengapa Harus Beli di Zawaya Kurma Premium?
-        </h2>
-        <div class="row g-4">
-          <div class="col-md-4">
-            <div class="text-center">
-              <i class="fas fa-check-circle text-gold fa-3x mb-3"></i>
-              <h4>100% Original</h4>
-              <p>Tanpa tambahan gula atau bahan pengawet apapun</p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="text-center">
-              <i class="fas fa-leaf text-gold fa-3x mb-3"></i>
-              <h4>Fresh & Berkualitas</h4>
-              <p>Dipanen langsung tahun ini untuk menjaga kualitas terbaik</p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="text-center">
-              <i class="fas fa-shipping-fast text-gold fa-3x mb-3"></i>
-              <h4>Bisa COD seluruh Indonesia</h4>
-              <p>Dikirim langsung ke rumah Anda dengan packaging aman</p>
-            </div>
-          </div>
+        <!-- Indicators -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            <button class="w-3 h-3 rounded-full bg-white opacity-50 indicator"></button>
+            <button class="w-3 h-3 rounded-full bg-white opacity-50 indicator"></button>
+            <button class="w-3 h-3 rounded-full bg-white opacity-50 indicator"></button>
         </div>
-      </div>
     </section>
 
-    <!-- Special Offer -->
-    <section class="bg-gold py-5">
-      <div class="container text-center text-white">
-        <h2 class="mb-3">PROMO SPESIAL HARI INI!</h2>
-        <p class="lead mb-4">Dapatkan Diskon 10% Spesial untuk hari ini</p>
-        <div class="countdown h4 mb-4">
-          Berakhir dalam: <span id="countdown">23:59:59</span>
-        </div>
-        <a href="#products" class="btn btn-light btn-lg">Beli Sekarang</a>
-      </div>
-    </section>
-
-    <!-- Products -->
-    <!-- Update Products Section -->
-    <section class="py-5" id="products">
-      <div class="container">
-        <h2 class="text-center mb-5">Produk Unggulan Kami</h2>
-        <div class="row g-4">
-          <!-- Product Card 1 -->
-          <div class="col-md-3">
-            <div class="card h-100">
-              <img
-                src="images/ajwa.png"
-                class="card-img-top"
-                alt="Kurma Ajwa"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Kurma Ajwa</h5>
-                <p class="card-text">
-                  Kurma Original High Quality Asli Madinah
-                </p>
-                <div class="d-flex justify-content-between mb-2">
-                  <span>500gr</span>
-                  <span class="text-gold">Rp 160.000</span>
-                </div>
-                <div class="d-flex justify-content-between mb-3">
-                  <span>1kg</span>
-                  <span class="text-gold">Rp 275.000</span>
-                </div>
-                <button
-                  class="btn btn-gold w-100"
-                  data-bs-toggle="modal"
-                  data-bs-target="#productModal1"
-                >
-                  Lihat Detail & Pesan
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- Product Card 2 -->
-          <div class="col-md-3">
-            <div class="card h-100">
-              <img
-                src="images/shoidi.png"
-                class="card-img-top"
-                alt="Kurma Shoidi"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Kurma Shoidi</h5>
-                <p class="card-text">Kurma Premium Asli Manis dan Lembut</p>
-                <div class="d-flex justify-content-between mb-2">
-                  <span>400gr</span>
-                  <span class="text-gold">Rp 35.000</span>
-                </div>
-                <div class="d-flex justify-content-between mb-3">
-                  <span>1kg</span>
-                  <span class="text-gold">Rp 60.000</span>
-                </div>
-                <button
-                  class="btn btn-gold w-100"
-                  data-bs-toggle="modal"
-                  data-bs-target="#productModal2"
-                >
-                  Lihat Detail & Pesan
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- Product Card 3 -->
-          <div class="col-md-3">
-            <div class="card h-100">
-              <img
-                src="images/medjool.png"
-                class="card-img-top"
-                alt="Kurma Ajwa"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Kurma Medjool</h5>
-                <p class="card-text">
-                  Kurma Medjool Original High Quality Premium
-                </p>
-                <div class="d-flex justify-content-between mb-2">
-                  <span>500gr</span>
-                  <span class="text-gold">Rp 135.000</span>
-                </div>
-                <div class="d-flex justify-content-between mb-3">
-                  <span>1kg</span>
-                  <span class="text-gold">Rp 250.000</span>
-                </div>
-                <button
-                  class="btn btn-gold w-100"
-                  data-bs-toggle="modal"
-                  data-bs-target="#productModal3"
-                >
-                  Lihat Detail & Pesan
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- Product Card 4 -->
-          <div class="col-md-3">
-            <div class="card h-100">
-              <img
-                src="images/sukari.png"
-                class="card-img-top"
-                alt="Kurma Ajwa"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Kurma Sukari</h5>
-                <p class="card-text">
-                  Kurma Premium Lembut Manis Legit Original
-                </p>
-                <div class="d-flex justify-content-between mb-2">
-                  <span>500gr</span>
-                  <span class="text-gold">Rp 55.000</span>
-                </div>
-                <div class="d-flex justify-content-between mb-3">
-                  <span>1kg</span>
-                  <span class="text-gold">Rp 85.000</span>
-                </div>
-                <button
-                  class="btn btn-gold w-100"
-                  data-bs-toggle="modal"
-                  data-bs-target="#productModal4"
-                >
-                  Lihat Detail & Pesan
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Repeat similar structure for other products with different modals (#productModal2, #productModal3, #productModal4) -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Memperbarui modal form dengan link langsung -->
-    <div class="modal fade" id="productModal1" tabindex="-1">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header bg-gold text-white">
-            <h5 class="modal-title">
-              Kurma Ajwa Premium Timur Tengah - Kurma Original High Quality Asli
-              Madinah
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="product-gallery">
-                  <img
-                    src="images/ajwa.png"
-                    class="img-fluid mb-3"
-                    alt="Kurma Ajwa"
-                  />
-                  <div class="row g-2">
-                    <div class="col-4">
-                      <img
-                        src="images/ajwa1.png"
-                        class="img-fluid"
-                        alt="Kurma Ajwa 1"
-                      />
+<section id="keunggulan" class="py-20 bg-gold-100 section-hidden">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center text-gold-900 mb-12">Mengapa Harus Beli di Zawaya Kurma Premium?</h2>
+        
+        <div class="grid md:grid-cols-4 gap-8">
+            <!-- Keunggulan 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
+                <div class="mb-4 flex justify-center">
+                    <div class="w-20 h-20 bg-gold-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-check-circle text-gold-600 text-4xl"></i>
                     </div>
-                    <div class="col-4">
-                      <img
-                        src="images/ajwa2.png"
-                        class="img-fluid"
-                        alt="Kurma Ajwa 2"
-                      />
-                    </div>
-                    <div class="col-4">
-                      <img
-                        src="images/ajwa5.png"
-                        class="img-fluid"
-                        alt="Kurma Ajwa 3"
-                      />
-                    </div>
-                  </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <!-- <h4 class="mb-3">Detail Produk</h4> -->
-                <p>
-                  Kurma Ajwa, yang juga dikenal sebagai "Kurma Nabi," sangat
-                  istimewa bagi umat Muslim karena direkomendasikan langsung
-                  oleh Nabi Muhammad ﷺ. Kurma ini menjadi pilihan favorit karena
-                  memiliki nilai sejarah dan manfaat kesehatan yang luar biasa.
-                  Nabi Muhammad ﷺ bersabda: "Barangsiapa mengonsumsi tujuh butir
-                  kurma Ajwa di pagi hari, maka pada hari itu ia tidak akan
-                  terkena racun maupun sihir." (HR. Bukhari dan Muslim).
-                </p>
-
-                <div class="mb-4">
-                  <h5>Manfaat dan Khasiat Kurma Ajwa:</h5>
-                  <ul>
-                    <li>Sesuai hadits Nabi, konsumsi kurma Ajwa dapat melindungi dari racun dan sihir.</li>
-                    <li>
-                      Kurma Ajwa membantu tubuh pulih lebih cepat setelah sakit.
-                    </li>
-                    <li>Buah ini sangat baik untuk mendukung kesehatan reproduksi.</li>
-                    <li>
-                      Kurma Ajwa membantu memenuhi kebutuhan nutrisi ibu hamil dan memperlancar produksi ASI.
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="order-section">
-                  <div class="mb-3">
-                    <label class="form-label">Pilih Ukuran:</label>
-                    <select class="form-select" id="sizeSelector">
-                      <option value="">Pilih ukuran</option>
-                      <option value="500">500gr - Rp 160.000</option>
-                      <option value="1000">1kg - Rp 275.000</option>
-                    </select>
-                    <small class="text-muted"
-                      >Silahkan pilih ukuran terlebih dahulu</small
-                    >
-                    <small class="text-muted"
-                      >agar tombol beli muncul di bawah</small
-                    >
-                  </div>
-
-                  <!-- Button untuk ukuran 500gr (awalnya tersembunyi) -->
-                  <a
-                    href="https://zawayakurma.orderonline.id/kurma-ajwa-500g"
-                    class="btn btn-gold w-100 mb-2 d-none"
-                    id="btn500"
-                  >
-                    Beli Paket 500gr
-                  </a>
-
-                  <!-- Button untuk ukuran 1kg (awalnya tersembunyi) -->
-                  <a
-                    href="https://zawayakurma.orderonline.id/kurma-ajwa-1kg"
-                    class="btn btn-gold w-100 mb-2 d-none"
-                    id="btn1000"
-                  >
-                    Beli Paket 1kg
-                  </a>
-                </div>
-              </div>
+                <h3 class="text-xl font-bold text-gold-900 mb-4">100% Original</h3>
+                <p class="text-gray-600">Tanpa tambahan gula atau bahan pengawet apapun.</p>
             </div>
-          </div>
+
+            <!-- Keunggulan 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
+                <div class="mb-4 flex justify-center">
+                    <div class="w-20 h-20 bg-gold-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-certificate text-gold-600 text-4xl"></i>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-gold-900 mb-4">Produk Asli Palestina</h3>
+                <p class="text-gray-600">Bekerja sama dengan Palestine Date Company untuk kami jualkan salah satu produk mereka (Medjool).</p>
+            </div>
+
+            <!-- Keunggulan 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
+                <div class="mb-4 flex justify-center">
+                    <div class="w-20 h-20 bg-gold-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-leaf text-gold-600 text-4xl"></i>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-gold-900 mb-4">Fresh & Berkualitas</h3>
+                <p class="text-gray-600">Dipanen langsung tahun ini untuk menjaga kualitas terbaik.</p>
+            </div>
+
+            <!-- Keunggulan 4 -->
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
+                <div class="mb-4 flex justify-center">
+                    <div class="w-20 h-20 bg-gold-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-shipping-fast text-gold-600 text-4xl"></i>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-gold-900 mb-4">Bisa COD Seluruh Indonesia</h3>
+                <p class="text-gray-600">Layanan pengiriman bisa COD ke seluruh wilayah Indonesia.</p>
+            </div>
         </div>
-      </div>
     </div>
-    <!-- 2 -->
-    <div class="modal fade" id="productModal2" tabindex="-1">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header bg-gold text-white">
-            <h5 class="modal-title">Kurma Shoidi</h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="product-gallery">
-                  <img
-                    src="images/shoidi.png"
-                    class="img-fluid mb-3"
-                    alt="Kurma Ajwa"
-                  />
-                  <div class="row g-2">
-                    <div class="col-4">
-                      <img
-                        src="images/shoidi1.png"
-                        class="img-fluid"
-                        alt="Kurma Ajwa 1"
-                      />
-                    </div>
-                    <div class="col-4">
-                      <img
-                        src="images/shoidi2.png"
-                        class="img-fluid"
-                        alt="Kurma Shoidi 2"
-                      />
-                    </div>
-                    <div class="col-4">
-                      <img
-                        src="images/shoidi3.png"
-                        class="img-fluid"
-                        alt="Kurma Shoidi 3"
-                      />
-                    </div>
-                  </div>
+</section>
+
+    <!-- Products Section -->
+    <section id="produk-pilihan" class="py-20 bg-gold-100 section-hidden">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center text-gold-900 mb-12">Produk Unggulan Kami</h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+            <!-- Produk 1 -->
+            <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="h-100 overflow-hidden">
+                    <img src="1.png" 
+                         class="w-full h-full object-cover transition-transform">
                 </div>
-              </div>
-              <div class="col-md-6">
-                <!-- <h4 class="mb-3">Detail Produk</h4> -->
-                <p>
-                  Kurma Shoidi dikenal luas karena kualitasnya yang baik dan
-                  sering dikemas secara praktis, menjadikannya pilihan yang
-                  populer, terutama selama bulan Ramadan. Saat banyak orang
-                  mencari kurma untuk berbuka puasa, Kurma Shoidi hadir sebagai
-                  solusi yang sempurna.
-                </p>
-
-                <div class="mb-4">
-                  <h5>Keunggulan Kurma Shoidi:</h5>
-                  <ul>
-                    <li>100% Original</li>
-                    <li>
-                      Meski berkualitas, kurma ini tetap ramah di kantong,
-                      sehingga dapat dinikmati oleh berbagai kalangan.
-                    </li>
-                    <li>Dipanen tahun ini</li>
-                    <li>
-                      Menawarkan berbagai jenis kurma yang berasal dari berbagai
-                      daerah penghasil kurma di Timur Tengah.
-                    </li>
-                  </ul>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2 text-gold-900">Kurma Medjool Asli Palestina</h3>
+                    <p class="text-gray-600 text-sm mb-4">500g - Rp 135.000 <br> 1kg - Rp 250.000</p>
+                    <button onclick="showModal('Kurma Medjool Asli Palestina')" class="w-full bg-gold-100 text-gold-900 py-2 rounded hover:bg-gold-200 transition-colors">
+                        Detail Produk
+                    </button>
                 </div>
-
-                <div class="order-section">
-                  <div class="mb-3">
-                    <label class="form-label">Pilih Ukuran:</label>
-                    <select class="form-select" id="sizeSelector2">
-                      <option value="">Pilih ukuran</option>
-                      <option value="600">400gr - Rp 35.000</option>
-                      <option value="2000">1kg - Rp 60.000</option>
-                    </select>
-                    <small class="text-muted"
-                      >Silahkan pilih ukuran terlebih dahulu</small
-                    >
-                    <small class="text-muted"
-                      >agar tombol beli muncul di bawah</small
-                    >
-                  </div>
-
-                  <!-- Button untuk ukuran 500gr (awalnya tersembunyi) -->
-                  <a
-                    href="https://zawayakurma.orderonline.id/kurma-shoidi-400g"
-                    class="btn btn-gold w-100 mb-2 d-none"
-                    id="btn600"
-                  >
-                    Beli Paket 400gr
-                  </a>
-
-                  <!-- Button untuk ukuran 1kg (awalnya tersembunyi) -->
-                  <a
-                    href="https://zawayakurma.orderonline.id/kurma-shoidi-1kg"
-                    class="btn btn-gold w-100 mb-2 d-none"
-                    id="btn2000"
-                  >
-                    Beli Paket 1kg
-                  </a>
-                </div>
-              </div>
             </div>
-          </div>
+
+            <!-- Produk 2 -->
+            <!-- <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="h-48 overflow-hidden">
+                    <img src="ula.png" 
+                         class="w-full h-full object-cover transition-transform">
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2 text-gold-900">Oud Madawwy</h3>
+                    <p class="text-gray-600 text-sm mb-4">3ml - Rp 180.000 / 6ml - Rp 300.000</p>
+                    <button onclick="showModal('Oud Madawwy')" class="w-full bg-gold-100 text-gold-900 py-2 rounded hover:bg-gold-200 transition-colors">
+                        Detail Produk
+                    </button>
+                </div>
+            </div> -->
+
+            <!-- Produk 3 -->
+            <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="h-100 overflow-hidden">
+                    <img src="shoidi.png" 
+                         class="w-full h-full object-cover transition-transform">
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2 text-gold-900">Kurma Shoidi</h3>
+                    <p class="text-gray-600 text-sm mb-4">500g - Rp 35.000 <br> 1kg - Rp 60.000</p>
+                    <button onclick="showModal('Kurma Shoidi')" class="w-full bg-gold-100 text-gold-900 py-2 rounded hover:bg-gold-200 transition-colors">
+                        Detail Produk
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produk 4 -->
+            <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="h-100 overflow-hidden">
+                    <img src="2.png" 
+                         class="w-full h-full object-cover transition-transform">
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2 text-gold-900">Kurma Ajwa</h3>
+                    <p class="text-gray-600 text-sm mb-4">500g - Rp 160.000 <br> 1kg - Rp 275.000</p>
+                    <button onclick="showModal('Kurma Ajwa')" class="w-full bg-gold-100 text-gold-900 py-2 rounded hover:bg-gold-200 transition-colors">
+                        Detail Produk
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produk 5 -->
+            <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="h-100 overflow-hidden">
+                    <img src="sukkari.png" 
+                         class="w-full h-full object-cover transition-transform">
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2 text-gold-900">Kurma Sukkari</h3>
+                    <p class="text-gray-600 text-sm mb-4">500g - Rp 55.000 <br> 1kg - Rp 85.000</p>
+                    <button onclick="showModal('Kurma Sukkari')" class="w-full bg-gold-100 text-gold-900 py-2 rounded hover:bg-gold-200 transition-colors">
+                        Detail Produk
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produk 6 -->
+            <!-- <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="h-100 overflow-hidden">
+                    <img src="5.png" 
+                        class="w-full h-full object-cover transition-transform">
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2 text-gold-900">Al'ula Oud</h3>
+                    <p class="text-gray-600 text-sm mb-4">3ml - Rp 63.000 <br> 6ml - Rp 98.000</p>
+                    <button onclick="showModal('Alula Oud')" class="w-full bg-gold-100 text-gold-900 py-2 rounded hover:bg-gold-200 transition-colors">
+                        Detail Produk
+                    </button>
+                </div>
+            </div> -->
         </div>
-      </div>
     </div>
-    <!-- 3 -->
-    <div class="modal fade" id="productModal3" tabindex="-1">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header bg-gold text-white">
-            <h5 class="modal-title">
-              Kurma Medjool Jumbo Premium Asli Palestina
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="product-gallery">
-                  <img
-                    src="images/medjool.png"
-                    class="img-fluid mb-3"
-                    alt="Kurma Shoidi"
-                  />
-                  <div class="row g-2">
-                    <div class="col-4">
-                      <img
-                        src="images/medjol.png"
-                        class="img-fluid"
-                        alt="Kurma Ajwa 1"
-                      />
+</section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-20 bg-amber-50 section-hidden">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-gold-900 mb-12">Customer Reviews</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md gold-border">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gold-100 mr-4 flex items-center justify-center">
+                            <i class="fas fa-user text-gold-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gold-900">Resti</h4>
+                            <div class="text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-4">
-                      <img
-                        src="images/medjol2.png"
-                        class="img-fluid"
-                        alt="Kurma Ajwa 2"
-                      />
+                    <p class="text-gray-600">"Enak rasanya beda dari yang lain dan untuk teksturnya empuk."</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md gold-border">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gold-100 mr-4 flex items-center justify-center">
+                            <i class="fas fa-user text-gold-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gold-900">Maulana</h4>
+                            <div class="text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-4">
-                      <img
-                        src="images/medjol3.png"
-                        class="img-fluid"
-                        alt="Kurma Ajwa 3"
-                      />
+                    <p class="text-gray-600">"Freshhh banget! cocok nih buat bulan puasa nanti"</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md gold-border">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gold-100 mr-4 flex items-center justify-center">
+                            <i class="fas fa-user text-gold-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gold-900">Ridho Laksmana</h4>
+                            <div class="text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
                     </div>
-                  </div>
+                    <p class="text-gray-600">"Kurmanya Manis, enak, bergizi, dan berenergi. Untuk kemasannya
+                rapih."</p>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <!-- <h4 class="mb-3">Detail Produk</h4> -->
-                <p>
-                  Kurma Medjool adalah salah satu jenis kurma premium terbaik
-                  yang telah dikenal di seluruh dunia. Kurma ini tumbuh subur di
-                  daerah beriklim kering seperti Timur Tengah, Palestina, Afrika
-                  Utara, hingga California, Amerika Serikat.
-                </p>
-
-               <div class="mb-4">
-                  <h5>Deskripsi Kurma Medjool:</h5>
-                  <ul>
-                    <li>
-                      Kurma Medjool memiliki rasa manis alami yang legit namun
-                      bebas gula tambahan, sehingga aman dikonsumsi oleh
-                      penderita diabetes.
-                    </li>
-                    <li>
-                      Kurma medjool yang kami jual bekerja sama dengan
-                      perusahaan Palestinian Date Company salah satu perusahaan
-                      terbesar milik kaum muslimin di Jericho West Bank.
-                    </li>
-                    <li>
-                      Kurma Medjool memiliki ukuran yang jauh lebih besar
-                      dibandingkan jenis kurma lainnya. Oleh karena itu, kurma
-                      ini dijuluki sebagai "Raja Kurma" atau "Berlian Kurma."
-                    </li>
-                    <li>Kemasan premium</li>
-                  </ul>
-                </div>
-
-                <div class="order-section">
-                  <div class="mb-3">
-                    <label class="form-label">Pilih Ukuran:</label>
-                    <select class="form-select" id="sizeSelector3">
-                      <option value="">Pilih ukuran</option>
-                      <option value="700">500gr - Rp 135.000</option>
-                      <option value="3000">1kg - Rp 250.000</option>
-                    </select>
-                    <small class="text-muted"
-                      >Silahkan pilih ukuran terlebih dahulu</small
-                    >
-                    <small class="text-muted"
-                      >agar tombol beli muncul di bawah</small
-                    >
-                  </div>
-
-                  <!-- Button untuk ukuran 500gr (awalnya tersembunyi) -->
-                  <a
-                    href="https://zawayakurma.orderonline.id/kurma-medjool-500gram"
-                    class="btn btn-gold w-100 mb-2 d-none"
-                    id="btn700"
-                  >
-                    Beli Paket 500gr
-                  </a>
-
-                  <!-- Button untuk ukuran 1kg (awalnya tersembunyi) -->
-                  <a
-                    href="https://zawayakurma.orderonline.id/kurma-medjool-1kg"
-                    class="btn btn-gold w-100 mb-2 d-none"
-                    id="btn3000"
-                  >
-                    Beli Paket 1kg
-                  </a>
-                </div>
-              </div>
+                <!-- Add more reviews similarly -->
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <!-- 4 -->
-    <div class="modal fade" id="productModal4" tabindex="-1">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header bg-gold text-white">
-            <h5 class="modal-title">
-              Kurma Sukari Premium Asli Alqassim - Lembut Manis Legit Premium
-              Original High Quality
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="product-gallery">
-                  <img
-                    src="images/sukari.png"
-                    class="img-fluid mb-3"
-                    alt="Kurma Ajwa"
-                  />
-                  <div class="row g-2">
-                    <div class="col-4">
-                      <img
-                        src="images/sukari1.png"
-                        class="img-fluid"
-                        alt="Kurma Ajwa 1"
-                      />
-                    </div>
-                    <div class="col-4">
-                      <img
-                        src="images/sukari2.png"
-                        class="img-fluid"
-                        alt="Kurma Ajwa 2"
-                      />
-                    </div>
-                    <div class="col-4">
-                      <img
-                        src="images/sukari3.png"
-                        class="img-fluid"
-                        alt="Kurma Ajwa 3"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <!-- <h4 class="mb-3">Detail Produk</h4> -->
-                <p>
-                  Kurma Sukari, yang dikenal juga sebagai "Kurma Raja,"
-                  merupakan salah satu jenis kurma yang sangat populer dan
-                  berkualitas tinggi. Kurma ini berasal dari Provinsi Al-Qasim,
-                  Arab Saudi, sehingga sering disebut sebagai Sukari Al-Qasim.
-                </p>
-
-                <div class="mb-4">
-                  <h5>Manfaat Konsumsi Kurma Sukari:</h5>
-                  <ul>
-                    <li>
-                      Kandungan kalium dalam kurma Sukari membantu
-                      menyeimbangkan tekanan darah.
-                    </li>
-                    <li>
-                      Kurma ini kaya akan antioksidan dan nutrisi penting untuk
-                      memperkuat daya tahan tubuh.
-                    </li>
-                    <li>
-                      Kurma Sukari membantu mengeluarkan racun dari saluran
-                      pencernaan, mengendalikan gula darah, menurunkan
-                      kolesterol, dan bahkan mencegah kanker usus.
-                    </li>
-                    <li>
-                      Dengan kandungan gula alami, kurma ini dapat dikonsumsi
-                      dengan aman oleh penderita diabetes.
-                    </li>
-                    <li>
-                      Kurma Sukari mengandung mineral penting seperti kalsium
-                      dan fosfor, yang membantu menjaga kesehatan dan
-                      pertumbuhan tulang.
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="order-section">
-                  <div class="mb-3">
-                    <label class="form-label">Pilih Ukuran:</label>
-                    <select class="form-select" id="sizeSelector4">
-                      <option value="">Pilih ukuran</option>
-                      <option value="800">500gr - Rp 55.000</option>
-                      <option value="4000">1kg - Rp 85.000</option>
-                    </select>
-                    <small class="text-muted"
-                      >Silahkan pilih ukuran terlebih dahulu</small
-                    >
-                    <small class="text-muted"
-                      >agar tombol beli muncul di bawah</small
-                    >
-                  </div>
-
-                  <!-- Button untuk ukuran 500gr (awalnya tersembunyi) -->
-                  <a
-                    href="https://zawayakurma.orderonline.id/kurma-sukari-500g"
-                    class="btn btn-gold w-100 mb-2 d-none"
-                    id="btn800"
-                  >
-                    Beli Paket 500gr
-                  </a>
-
-                  <!-- Button untuk ukuran 1kg (awalnya tersembunyi) -->
-                  <a
-                    href="https://zawayakurma.orderonline.id/kurma-sukari-1kg"
-                    class="btn btn-gold w-100 mb-2 d-none"
-                    id="btn4000"
-                  >
-                    Beli Paket 1kg
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Testimonials -->
-    <section class="py-5 bg-light" id="testimonials">
-      <div class="container">
-        <h2 class="text-center mb-5">Apa Kata Pelanggan Kami</h2>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="testimonial-card">
-              <div class="star-rating mb-3">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <p>
-                "Enak rasanya beda dari yang lain dan untuk teksturnya empuk."
-              </p>
-              <div class="d-flex align-items-center">
-                <img
-                  src="images/resti.png"
-                  class="rounded-circle me-3"
-                  alt="Customer"
-                />
-                <div>
-                  <h6 class="mb-0">Resti</h6>
-                  <!-- <small class="text-muted">Lebak</small> -->
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="testimonial-card">
-              <div class="star-rating mb-3">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <p>
-                "Kurmanya Manis, enak, bergizi, dan berenergi. Untuk kemasannya
-                rapih."
-              </p>
-              <div class="d-flex align-items-center">
-                <img
-                  src="/images/rido.png"
-                  class="rounded-circle me-3"
-                  alt="Customer"
-                />
-                <div>
-                  <h6 class="mb-0">Ridho Laksmana</h6>
-                  <!-- <small class="text-muted">Surabaya</small> -->
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="testimonial-card">
-              <div class="star-rating mb-3">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <p>
-                "Sudah langganan di sini. Kurma selalu fresh dan pelayanannya
-                memuaskan!"
-              </p>
-              <div class="d-flex align-items-center">
-                <img
-                  src="/images/adis.png"
-                  class="rounded-circle me-3"
-                  alt="Customer"
-                />
-                <div>
-                  <h6 class="mb-0">Adis Ramadhani</h6>
-                  <!-- <small class="text-muted">Bandung</small> -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 mb-4 mb-md-0">
-            <h5 class="text-gold">Zawaya Kurma Premium</h5>
-            <p>
-              Menyediakan kurma premium berkualitas tinggi untuk kepuasan
-              pelanggan.
-            </p>
-          </div>
-          <div class="col-md-4 mb-4 mb-md-0">
-            <h5 class="text-gold">Kontak Kami</h5>
+    <footer class="bg-gold-900 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Zawaya Kurma Premium. All rights reserved.</p>
+        </div>
+        <div class="container mx-auto px-6 text-center">
+            <!-- <h5 class="text-gold">Kontak Kami</h5> -->
             <p><i class="fas fa-phone me-2"></i> +62 896-6979-3046</p>
-            <p><i class="fas fa-envelope me-2"></i> info@zawayakurma.com</p>
+            <!-- <p><i class="fas fa-envelope me-2"></i> info@zawayakurma.com</p> -->
             <p>
               <i class="fas fa-map-marker-alt me-2"></i> Jakarta Timur,
               Indonesia
             </p>
           </div>
-          <div class="col-md-4">
-            <h5 class="text-gold">Ikuti Kami</h5>
+          <br>
+          <div class="container mx-auto px-6 text-center">
+            <!-- <h5 class="text-gold">Ikuti Kami</h5> -->
             <div class="social-links">
               <a
                 href="https://www.instagram.com/zawayakurma/"
@@ -1129,203 +404,305 @@
                 ><i class="fab fa-whatsapp fa-lg"></i
               ></a>
             </div>
-          </div>
-        </div>
-        <hr class="my-4" />
-        <div class="text-center">
-          <p class="mb-0">
-            &copy; 2025 Zawaya Kurma Premium. All rights reserved.
-          </p>
-        </div>
-      </div>
     </footer>
 
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+ <!-- Product Modal -->
+<div id="productModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 gold-border">
+            <div class="flex justify-between mb-4">
+                <h3 class="text-2xl font-bold text-gold-900" id="modalTitle"></h3>
+                <button id="closeModal" class="text-gold-900 hover:text-gold-600">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Product Image -->
+            <img id="modalImage" src="" alt="" class="w-full h-48 object-cover mb-4 rounded-lg shadow-md">
+            
+            <!-- Product Details -->
+            <div class="mb-4 space-y-4">
+                <div>
+                    <p class="text-gray-600 text-sm" id="productDescription"></p>
+                </div>
+                
+                <div class="bg-gold-100 p-4 rounded-lg">
+                    <h4 class="font-bold text-gold-900 mb-2">Detail Produk:</h4>
+                    <ul class="text-sm space-y-2" id="productDetails">
+                        <li class="flex justify-between">
+                            <span class="text-gray-600"></span>
+                            <span class="text-gold-900" id="productScent"></span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-gray-600"></span>
+                            <span class="text-gold-900" id="productLongevity"></span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-gray-600"></span>
+                            <span class="text-gold-900" id="productIntensity"></span>
+                        </li>
+                    </ul>
+                </div>
 
-    <!-- detail product -->
+                <div class="bg-amber-50 p-4 rounded-lg">
+                    <h4 class="font-bold text-gold-900 mb-2">Keunggulan:</h4>
+                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-1" id="productNotes"></ul>
+                </div>
+            </div>
+
+            <!-- Variant Selection -->
+            <div class="mb-4">
+                <label class="block mb-2 text-gold-900">Berat:</label>
+                <select id="variantSelect" class="w-full p-2 border rounded focus:ring-2 focus:ring-gold-600">
+                    <option value="">Pilih berat kurma</option>
+                </select>
+                <p id="checkoutNote" class="text-sm text-red-500 mt-2 hidden">
+                    Pilih berat kurma agar tombol checkout muncul di bawah
+                </p>
+            </div>
+
+            <!-- Order Button (initially hidden) -->
+            <button id="shopeeButton" target="_blank" 
+                    class="hidden w-full gold-gradient text-white py-3 rounded-lg hover:opacity-90 transition-opacity font-bold text-center">
+                Checkout
+            </button>
+        </div>
+    </div>
+</div>
+
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Handle thumbnail clicks
-        const thumbnails = document.querySelectorAll(".thumbnail");
-        thumbnails.forEach((thumb) => {
-          thumb.addEventListener("click", function () {
-            // Remove active class from all thumbnails
-            thumbnails.forEach((t) => t.classList.remove("active"));
-            // Add active class to clicked thumbnail
-            this.classList.add("active");
-          });
+        // Carousel Logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        const indicators = document.querySelectorAll('.indicator');
+
+        function showSlide(index) {
+            if (index >= slides.length) currentSlide = 0;
+            else if (index < 0) currentSlide = slides.length - 1;
+            else currentSlide = index;
+
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === currentSlide);
+                slide.classList.toggle('hidden', i !== currentSlide);
+            });
+
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('opacity-50', i !== currentSlide);
+                indicator.classList.toggle('!opacity-100', i === currentSlide);
+            });
+        }
+
+        // Auto slide
+        let autoSlide = setInterval(() => showSlide(currentSlide + 1), 5000);
+
+        // Manual controls
+        document.getElementById('prevSlide').addEventListener('click', () => {
+            clearInterval(autoSlide);
+            showSlide(currentSlide - 1);
+            autoSlide = setInterval(() => showSlide(currentSlide + 1), 5000);
         });
 
-        // Update thumbnail active state when carousel slides
-        const productCarousel = document.getElementById("productCarousel");
-        productCarousel.addEventListener("slid.bs.carousel", function (event) {
-          // Remove active class from all thumbnails
-          thumbnails.forEach((t) => t.classList.remove("active"));
-          // Add active class to current thumbnail
-          thumbnails[event.to].classList.add("active");
-        });
-      });
-    </script>
-
-    <!-- Countdown Script -->
-    <script>
-      function updateCountdown() {
-        const now = new Date();
-        const midnight = new Date();
-        midnight.setHours(23, 59, 59);
-
-        const diff = midnight - now;
-
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        document.getElementById("countdown").textContent = `${String(
-          hours
-        ).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(
-          seconds
-        ).padStart(2, "0")}`;
-      }
-
-      setInterval(updateCountdown, 1000);
-      updateCountdown();
-    </script>
-    <script>
-      // Mengatur interval carousel
-      document.addEventListener("DOMContentLoaded", function () {
-        var myCarousel = document.querySelector("#heroCarousel");
-        var carousel = new bootstrap.Carousel(myCarousel, {
-          interval: 5000, // Slide berganti setiap 5 detik
-          wrap: true, // Carousel akan berulang
-          ride: "carousel",
-        });
-      });
-    </script>
-    <script>
-      // Handle form submission
-      document.querySelectorAll(".order-form").forEach((form) => {
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          const size = this.querySelector("select").value;
-          const qty = this.querySelector('input[type="number"]').value;
-          const name = this.querySelector('input[type="text"]').value;
-          const whatsapp = this.querySelector('input[type="tel"]').value;
-          const address = this.querySelector("textarea").value;
-        });
-      });
-    </script>
-    <script>
-      document
-        .getElementById("sizeSelector")
-        .addEventListener("change", function () {
-          // Sembunyikan semua button terlebih dahulu
-          document.getElementById("btn500").classList.add("d-none");
-          document.getElementById("btn1000").classList.add("d-none");
-
-          // Tampilkan button sesuai dengan ukuran yang dipilih
-          if (this.value === "500") {
-            document.getElementById("btn500").classList.remove("d-none");
-          } else if (this.value === "1000") {
-            document.getElementById("btn1000").classList.remove("d-none");
-          }
-        });
-    </script>
-    <!-- 2 -->
-    <script>
-      document
-        .getElementById("sizeSelector2")
-        .addEventListener("change", function () {
-          // Sembunyikan semua button terlebih dahulu
-          document.getElementById("btn600").classList.add("d-none");
-          document.getElementById("btn2000").classList.add("d-none");
-
-          // Tampilkan button sesuai dengan ukuran yang dipilih
-          if (this.value === "600") {
-            document.getElementById("btn600").classList.remove("d-none");
-          } else if (this.value === "2000") {
-            document.getElementById("btn2000").classList.remove("d-none");
-          }
-        });
-    </script>
-    <!-- 3 -->
-    <script>
-      document
-        .getElementById("sizeSelector3")
-        .addEventListener("change", function () {
-          // Sembunyikan semua button terlebih dahulu
-          document.getElementById("btn700").classList.add("d-none");
-          document.getElementById("btn3000").classList.add("d-none");
-
-          // Tampilkan button sesuai dengan ukuran yang dipilih
-          if (this.value === "700") {
-            document.getElementById("btn700").classList.remove("d-none");
-          } else if (this.value === "3000") {
-            document.getElementById("btn3000").classList.remove("d-none");
-          }
-        });
-    </script>
-    <!-- 4 -->
-    <script>
-      document
-        .getElementById("sizeSelector4")
-        .addEventListener("change", function () {
-          // Sembunyikan semua button terlebih dahulu
-          document.getElementById("btn800").classList.add("d-none");
-          document.getElementById("btn4000").classList.add("d-none");
-
-          // Tampilkan button sesuai dengan ukuran yang dipilih
-          if (this.value === "800") {
-            document.getElementById("btn800").classList.remove("d-none");
-          } else if (this.value === "4000") {
-            document.getElementById("btn4000").classList.remove("d-none");
-          }
-        });
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const navbar = document.querySelector(".navbar");
-        const navbarCollapse = document.querySelector(".navbar-collapse");
-        const navbarToggler = document.querySelector(".navbar-toggler");
-
-        // Handle scroll
-        window.addEventListener("scroll", function () {
-          if (window.scrollY > 50) {
-            navbar.classList.add("navbar-scrolled");
-          } else {
-            navbar.classList.remove("navbar-scrolled");
-          }
+        document.getElementById('nextSlide').addEventListener('click', () => {
+            clearInterval(autoSlide);
+            showSlide(currentSlide + 1);
+            autoSlide = setInterval(() => showSlide(currentSlide + 1), 5000);
         });
 
-        // Close mobile menu on click
-        document.querySelectorAll(".nav-link").forEach((link) => {
-          link.addEventListener("click", () => {
-            if (navbarCollapse.classList.contains("show")) {
-              navbarToggler.click();
+        // Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('section-show');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section-hidden').forEach((el) => observer.observe(el));
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if(window.scrollY > 50) {
+                nav.classList.remove('nav-hidden');
+                nav.classList.add('bg-white', 'shadow-md');
+            } else {
+                nav.classList.add('nav-hidden');
+                nav.classList.remove('bg-white', 'shadow-md');
             }
-          });
         });
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-          anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute("href"));
-            if (target) {
-              const headerOffset = 70;
-              const elementPosition = target.offsetTop;
-              const offsetPosition = elementPosition - headerOffset;
-
-              window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth",
-              });
-            }
-          });
+        // Mobile Menu Toggle
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
         });
-      });
     </script>
-  </body>
+    <script>
+    // Product Data
+    const products = [
+        {
+            name: "Kurma Medjool Asli Palestina",
+            image: "1.png",
+            description: "Kurma Medjool adalah salah satu jenis kurma premium terbaik yang telah dikenal di seluruh dunia.",
+            scent: "Kurma Medjool yang kami jual bekerja sama dengan perusahaan Palestine Date Company salah satu perusahaan terbesar milik kaum muslimin di Jericho West Bank.",
+            longevity: "",
+            intensity: "",
+            notes: [
+                "Kurma Medjool memiliki rasa manis alami yang legit namun bebas gula tambahan.",
+                "Kemasan premium yang eksklusif menjadikan kurma ini cocok sebagai hadiah atau oleh-oleh.",
+                "Kurma Medjool memiliki ukuran yang jauh lebih besar dibandingkan jenis kurma lainnya."
+            ],
+            variants: [
+                { size: "500g", price: "Rp 135.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-medjool-500gram" },
+                { size: "1kg", price: "Rp 250.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-medjool-1kg" }
+            ]
+        },
+        {
+            name: "Oud Madawwy",
+            image: ".png",
+            description: "Perpaduan aroma klasik yang mewah, menampilkan keanggunan sejati.",
+            scent: "Oriental, Spicy",
+            longevity: "10-12 Jam",
+            intensity: "Strong",
+            notes: [
+                "Top Notes: Saffron, Cardamom",
+                "Middle Notes: Rose, Oud",
+                "Base Notes: Vanilla, Sandalwood"
+            ],
+            variants: [
+                { size: "3ml", price: "Rp 180.000", shopeeLink: "https://shopee.co.id/ula-classic-3ml" },
+                { size: "6ml", price: "Rp 300.000", shopeeLink: "https://shopee.co.id/ula-classic-6ml" }
+            ]
+        },
+        {
+            name: "Kurma Shoidi",
+            image: "3.png",
+            description: "Kurma Shoidi dikenal luas karena kualitasnya yang baik dan sering dikemas secara praktis, menjadikannya pilihan yang populer, terutama selama bulan Ramadan.",
+            scent: "Saat banyak orang mencari kurma untuk berbuka puasa, Kurma Shoidi hadir sebagai solusi yang sempurna.",
+            longevity: "",
+            intensity: "",
+            notes: [
+                "100% original, kurma asli tanpa tambahan gula.",
+                "Meski berkualitas, kurma ini tetap ramah di kantong, sehingga dapat dinikmati oleh berbagai kalangan.",
+                "Dipanen tahun ini untuk menjaga kualitas terbaik."
+            ],
+            variants: [
+                { size: "400g", price: "Rp 35.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-shoidi-400g" },
+                { size: "1kg", price: "Rp 60.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-shoidi-1kg" }
+            ]
+        },
+        {
+            name: "Kurma Ajwa",
+            image: "2.png",
+            description: "Kurma Ajwa, yang juga dikenal sebagai Kurma Nabi, sangat istimewa bagi umat Muslim karena direkomendasikan langsung oleh Nabi Muhammad ﷺ.",
+            scent: 'Kurma ini menjadi pilihan favorit karena memiliki nilai sejarah dan manfaat kesehatan yang luar biasa. Nabi Muhammad ﷺ bersabda: "Barangsiapa mengonsumsi tujuh butir kurma Ajwa di pagi hari, maka pada hari itu ia tidak akan terkena racun maupun sihir." (HR. Bukhari dan Muslim).',
+            longevity: "",
+            intensity: "",
+            notes: [
+                "Sesuai hadits Nabi, konsumsi kurma Ajwa dapat melindungi dari racun dan sihir.",
+                "Kurma Ajwa membantu tubuh pulih lebih cepat setelah sakit.",
+                "Buah ini sangat baik untuk mendukung kesehatan reproduksi."
+            ],
+            variants: [
+                { size: "500g", price: "Rp 160.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-ajwa-500g" },
+                { size: "1kg", price: "Rp 275.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-ajwa-1kg" }
+            ]
+        },
+        {
+            name: "Kurma Sukkari",
+            image: "4.png",
+            description: "Kurma Sukkari, yang dikenal juga sebagai Kurma Raja, merupakan salah satu jenis kurma yang sangat populer dan berkualitas tinggi.",
+            scent: "Kurma ini berasal dari Provinsi Al-Qasim, Arab Saudi, sehingga sering disebut sebagai Sukkari Al-Qasim.",
+            longevity: "",
+            intensity: "",
+            notes: [
+                "Kandungan kalium dalam kurma Sukari membantu menyeimbangkan tekanan darah.",
+                "Kurma ini kaya akan antioksidan dan nutrisi penting untuk memperkuat daya tahan tubuh.",
+                "Kurma Sukari mengandung mineral penting seperti kalsium dan fosfor, yang membantu menjaga kesehatan dan pertumbuhan tulang."
+            ],
+            variants: [
+                { size: "500g", price: "Rp 55.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-sukari-500g" },
+                { size: "1kg", price: "Rp 85.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-sukari-1kg" }
+            ]
+        },
+        {
+            name: "Alula Oud",
+            image: "5.png",
+            description: "Memadukan gaharu yang lembut dan elegan",
+            scent: "Oud, Vanilla, Amber, Versatile",
+            longevity: "10-12 Jam",
+            intensity: "Medium",
+            notes: [
+                "Top Notes: Vanilla",
+                "Middle Notes: Oud",
+                "Base Notes: Sandalwood"
+            ],
+            variants: [
+                { size: "3ml", price: "Rp 63.000", shopeeLink: "https://shopee.co.id/ula-classic-3ml" },
+                { size: "6ml", price: "Rp 98.000", shopeeLink: "https://shopee.co.id/ula-classic-6ml" }
+            ]
+        },
+        // Add similar objects for other products...
+    ];
+
+    function showModal(productName) {
+        const product = products.find(p => p.name === productName);
+        
+        // Reset form
+        document.getElementById('variantSelect').value = "";
+        document.getElementById('shopeeButton').classList.add('hidden');
+        document.getElementById('checkoutNote').classList.remove('hidden');
+        
+        // Update modal content
+        document.getElementById('modalTitle').textContent = product.name;
+        document.getElementById('modalImage').src = product.image;
+        document.getElementById('productDescription').textContent = product.description;
+        document.getElementById('productScent').textContent = product.scent;
+        document.getElementById('productLongevity').textContent = product.longevity;
+        document.getElementById('productIntensity').textContent = product.intensity;
+        
+        // Update product notes
+        const notesList = document.getElementById('productNotes');
+        notesList.innerHTML = product.notes.map(note => 
+            `<li class="text-sm">${note}</li>`
+        ).join('');
+
+        // Update variants
+        const variantSelect = document.getElementById('variantSelect');
+        variantSelect.innerHTML = '<option value="">Pilih berat kurma</option>' + 
+            product.variants.map((v, i) => 
+                `<option value="${i}">${v.size} - ${v.price}</option>`
+            ).join('');
+
+        document.getElementById('productModal').classList.remove('hidden');
+    }
+
+    // Handle variant selection
+    document.getElementById('variantSelect').addEventListener('change', (e) => {
+        const shopeeButton = document.getElementById('shopeeButton');
+        const checkoutNote = document.getElementById('checkoutNote');
+        
+        if (e.target.value !== "") {
+            // Show order button and hide note
+            shopeeButton.classList.remove('hidden');
+            checkoutNote.classList.add('hidden');
+            
+            // Update Shopee link
+            const selectedProduct = products.find(p => p.name === document.getElementById('modalTitle').textContent);
+            const selectedVariant = selectedProduct.variants[parseInt(e.target.value)];
+            shopeeButton.onclick = () => window.open(selectedVariant.shopeeLink, '_blank');
+        } else {
+            // Hide order button and show note
+            shopeeButton.classList.add('hidden');
+            checkoutNote.classList.remove('hidden');
+        }
+    });
+
+    // Close modal
+    document.getElementById('closeModal').addEventListener('click', () => {
+        document.getElementById('productModal').classList.add('hidden');
+    });
+</script>
+
+</body>
 </html>
