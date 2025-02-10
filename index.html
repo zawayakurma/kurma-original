@@ -90,6 +90,59 @@ body.modal-open {
         scroll-padding-top: 10px; /* Mengatur offset untuk navbar fixed */
     }
     </style>
+<style>
+    .discount-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: red;
+        color: white;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        overflow: hidden;
+    }
+    
+    .discount-badge::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.7), transparent);
+        animation: shine 2s infinite linear;
+    }
+    
+    @keyframes shine {
+        0% {
+            left: -100%;
+        }
+        100% {
+            left: 100%;
+        }
+    }
+    .price {
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 10px;
+    }
+    
+    .price .original {
+        text-decoration: line-through;
+        color: gray;
+        margin-right: 10px;
+    }
+    
+    .price .discounted {
+        color: red;
+    }
+</style>
 
 </head>
 <body class="bg-gold-100">
@@ -245,14 +298,28 @@ body.modal-open {
         
         <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
             <!-- Produk 1 -->
-            <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <div class="product-card relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="discount-badge">
+                        <i class="fas fa-tags"></i>
+                        <span>Sedang Diskon</span>
+                    </div>
                 <div class="h-100 overflow-hidden">
+                    
                     <img src="1.png" 
                          class="w-full h-full object-cover transition-transform">
                 </div>
-                <div class="p-4">
+                <div class="p-4 price">
                     <h3 class="font-bold text-lg mb-2 text-gold-900">Kurma Medjool Asli Palestina</h3>
-                    <p class="text-gray-600 text-sm mb-4">500g - Rp 135.000 <br> 1kg - Rp 250.000</p>
+                    <span>500kg</span>
+                    <span class="original">Rp 150.000</span>
+                    <span class="discounted">Rp 135.000</span>
+                    <br>
+                    <span>1kg</span>
+                    <span class="original">Rp 280.000</span>
+                    <span class="discounted">Rp 250.000</span>
+                    <p>❤️</p>
+                    
+                    <!-- <p class="text-gray-600 text-sm mb-4">500g - Rp 135.000 <br> 1kg - Rp 250.000</p> -->
                     <button onclick="showModal('Kurma Medjool Asli Palestina')" class="w-full bg-gold-100 text-gold-900 py-2 rounded hover:bg-gold-200 transition-colors">
                         Detail Produk
                     </button>
