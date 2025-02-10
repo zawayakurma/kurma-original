@@ -77,13 +77,19 @@
         padding: 1.5rem;
     }
 }
+body.modal-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
     </style>
+    
     <style>
     html {
         scroll-behavior: smooth;  /* Membuat scroll halus */
         scroll-padding-top: 10px; /* Mengatur offset untuk navbar fixed */
     }
-</style>
+    </style>
 
 </head>
 <body class="bg-gold-100">
@@ -672,15 +678,17 @@
         // Add similar objects for other products...
     ];
 
-    function showModal(productName) {
-        const product = products.find(p => p.name === productName);
-        
-        // Reset form
-        document.getElementById('variantSelect').value = "";
-        document.getElementById('shopeeButton').classList.add('hidden');
-        document.getElementById('checkoutNote').classList.remove('hidden');
-        
-        // Update modal content
+function showModal(productName) {
+    const product = products.find(p => p.name === productName);
+    
+    if (!product) return;
+
+    // Simpan posisi scroll sebelum membuka modal
+    const scrollY = window.scrollY;
+    document.body.style.overflow = "hidden"; // Mencegah scroll tanpa mengubah posisi halaman
+    document.body.setAttribute("data-scroll-position", scrollY);
+
+    // Update modal content
         document.getElementById('modalTitle').textContent = product.name;
         document.getElementById('modalImage').src = product.image;
         document.getElementById('productDescription').textContent = product.description;
@@ -725,10 +733,19 @@
         }
     });
 
-    // Close modal
-    document.getElementById('closeModal').addEventListener('click', () => {
-        document.getElementById('productModal').classList.add('hidden');
-    });
+// Close modal
+document.getElementById('closeModal').addEventListener('click', () => {
+    document.getElementById('productModal').classList.add('hidden');
+
+    // Ambil posisi terakhir sebelum modal dibuka
+    const scrollY = document.body.getAttribute("data-scroll-position");
+    
+    // Aktifkan kembali scroll dan kembalikan posisi halaman
+    document.body.style.overflow = ""; 
+    window.scrollTo(0, parseInt(scrollY || "0"));
+});
+
+
 </script>
 
 </body>
