@@ -1,0 +1,122 @@
+ .nav-hidden {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .carousel-item {
+            transition: opacity 1s ease-in-out;
+        }
+
+        .gold-gradient {
+            background: linear-gradient(45deg, #D4AF37 0%, #B8860B 100%);
+        }
+
+        .gold-border {
+            border: 2px solid #D4AF37;
+        }
+
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s;
+        }
+
+        .section-show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Modal Scrollable */
+#productModal .bg-white {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@media (max-width: 640px) {
+    #productModal .bg-white {
+        max-height: 80vh;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    #modalImage {
+        max-height: 30vh;
+        object-fit: cover;
+    }
+    
+    .modal-content {
+        padding: 1.5rem;
+    }
+}
+body.modal-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+    html {
+        scroll-behavior: smooth;  /* Membuat scroll halus */
+        scroll-padding-top: 10px; /* Mengatur offset untuk navbar fixed */
+    }
+    .discount-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: red;
+        color: white;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        overflow: hidden;
+        z-index: 10;
+        pointer-events: none;
+    }
+    
+    .discount-badge::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.7), transparent);
+        animation: shine 2s infinite linear;
+    }
+    
+    @keyframes shine {
+        0% {
+            left: -100%;
+        }
+        100% {
+            left: 100%;
+        }
+    }
+    
+    .price {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 10px;
+    }
+    
+    .price .original {
+        text-decoration: line-through;
+        color: gray;
+        margin-right: 10px;
+    }
+    
+    .price .discounted {
+        color: red;
+    }
+    
+    .product-card {
+        position: relative;
+        overflow: hidden;
+    }
