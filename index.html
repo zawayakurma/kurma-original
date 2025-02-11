@@ -404,6 +404,23 @@
                 <img id="modalImage" src="" alt="" class="w-full h-48 object-cover mb-4 rounded-lg shadow-md">  
             </div>
             
+
+            <!-- Variant Selection -->
+            <div class="mb-4">
+                <label class="block mb-2 text-gold-900">Berat:</label>
+                <select id="variantSelect" class="w-full p-2 border rounded focus:ring-2 focus:ring-gold-600">
+                    <option value="">Pilih berat kurma</option>
+                </select>
+                <p id="checkoutNote" class="text-sm text-red-500 mt-2 hidden">
+                    Pilih berat kurma agar tombol checkout muncul di bawah
+                </p>
+            </div>
+
+            <!-- Order Button (initially hidden) -->
+            <button id="shopeeButton" target="_blank" 
+                    class="mb-4 w-full gold-gradient text-white py-3 rounded-lg hover:opacity-90 transition-opacity font-bold text-center">
+                Checkout
+            </button>
             <!-- Product Details -->
             <div class="mb-4 space-y-4">
                 <div>
@@ -433,23 +450,6 @@
                     <ul class="" id="productNotes"></ul>
                 </div>
             </div>
-
-            <!-- Variant Selection -->
-            <div class="mb-4">
-                <label class="block mb-2 text-gold-900">Berat:</label>
-                <select id="variantSelect" class="w-full p-2 border rounded focus:ring-2 focus:ring-gold-600">
-                    <option value="">Pilih berat kurma</option>
-                </select>
-                <p id="checkoutNote" class="text-sm text-red-500 mt-2 hidden">
-                    Pilih berat kurma agar tombol checkout muncul di bawah
-                </p>
-            </div>
-
-            <!-- Order Button (initially hidden) -->
-            <button id="shopeeButton" target="_blank" 
-                    class="hidden w-full gold-gradient text-white py-3 rounded-lg hover:opacity-90 transition-opacity font-bold text-center">
-                Checkout
-            </button>
         </div>
     </div>
 </div>
