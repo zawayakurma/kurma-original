@@ -71,109 +71,156 @@ document.getElementById("menu-btn").addEventListener("click", () => {
 
  // Product Data
     const products = [
-        {
-            name: "Kurma Medjool Asli Palestina",
-            image: "1.png",
-            description: "Kurma Medjool adalah salah satu jenis kurma premium terbaik yang telah dikenal di seluruh dunia.",
-            scent: "Kurma Medjool yang kami jual bekerja sama dengan perusahaan Palestine Date Company salah satu perusahaan terbesar milik kaum muslimin di Jericho West Bank.",
-            longevity: "",
-            intensity: "",
-            notes: [
-                "",
-                "",
-                ""
-            ],
-            variants: [
-                { size: "500g", price: "Rp 135.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-medjool-500gram" },
-                { size: "1kg", price: "Rp 250.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-medjool-1kg" }
-            ]
-        },
-        {
-            name: "Oud Madawwy",
-            image: ".png",
-            description: "Perpaduan aroma klasik yang mewah, menampilkan keanggunan sejati.",
-            scent: "Oriental, Spicy",
-            longevity: "10-12 Jam",
-            intensity: "Strong",
-            notes: [
-                "Top Notes: Saffron, Cardamom",
-                "Middle Notes: Rose, Oud",
-                "Base Notes: Vanilla, Sandalwood"
-            ],
-            variants: [
-                { size: "3ml", price: "Rp 180.000", shopeeLink: "https://shopee.co.id/ula-classic-3ml" },
-                { size: "6ml", price: "Rp 300.000", shopeeLink: "https://shopee.co.id/ula-classic-6ml" }
-            ]
-        },
-        {
-            name: "Kurma Shoidi",
-            image: "4.png",
-            description: "Kurma Shoidi dikenal luas karena kualitasnya yang baik dan sering dikemas secara praktis, menjadikannya pilihan yang populer, terutama selama bulan Ramadan.",
-            scent: "Saat banyak orang mencari kurma untuk berbuka puasa, Kurma Shoidi hadir sebagai solusi yang sempurna.",
-            longevity: "",
-            intensity: "",
-            notes: [
-                "",
-                "",
-                ""
-            ],
-            variants: [
-                { size: "400g", price: "Rp 35.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-shoidi-400g" },
-                { size: "1kg", price: "Rp 60.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-shoidi-1kg" }
-            ]
-        },
-        {
-            name: "Kurma Ajwa",
-            image: "2.png",
-            description: "Kurma Ajwa, yang juga dikenal sebagai Kurma Nabi, sangat istimewa bagi umat Muslim karena direkomendasikan langsung oleh Nabi Muhammad ﷺ.",
-            scent: 'Kurma ini menjadi pilihan favorit karena memiliki nilai sejarah dan manfaat kesehatan yang luar biasa. Nabi Muhammad ﷺ bersabda: "Barangsiapa mengonsumsi tujuh butir kurma Ajwa di pagi hari, maka pada hari itu ia tidak akan terkena racun maupun sihir." (HR. Bukhari dan Muslim).',
-            longevity: "",
-            intensity: "",
-            notes: [
-                "",
-                "",
-                ""
-            ],
-            variants: [
-                { size: "500g", price: "Rp 160.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-ajwa-500g" },
-                { size: "1kg", price: "Rp 275.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-ajwa-1kg" }
-            ]
-        },
-        {
-            name: "Kurma Sukkari",
-            image: "3.png",
-            description: "Kurma Sukkari, yang dikenal juga sebagai Kurma Raja, merupakan salah satu jenis kurma yang sangat populer dan berkualitas tinggi.",
-            scent: "Kurma ini berasal dari Provinsi Al-Qasim, Arab Saudi, sehingga sering disebut sebagai Sukkari Al-Qasim.",
-            longevity: "",
-            intensity: "",
-            notes: [
-                "",
-                "",
-                ""
-            ],
-            variants: [
-                { size: "500g", price: "Rp 55.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-sukari-500g" },
-                { size: "1kg", price: "Rp 85.000", shopeeLink: "https://zawayakurma.orderonline.id/kurma-sukari-1kg" }
-            ]
-        },
-        {
-            name: "Alula Oud",
-            image: "5.png",
-            description: "Memadukan gaharu yang lembut dan elegan",
-            scent: "Oud, Vanilla, Amber, Versatile",
-            longevity: "10-12 Jam",
-            intensity: "Medium",
-            notes: [
-                "Top Notes: Vanilla",
-                "Middle Notes: Oud",
-                "Base Notes: Sandalwood"
-            ],
-            variants: [
-                { size: "3ml", price: "Rp 63.000", shopeeLink: "https://shopee.co.id/ula-classic-3ml" },
-                { size: "6ml", price: "Rp 98.000", shopeeLink: "https://shopee.co.id/ula-classic-6ml" }
-            ]
-        },
-        // Add similar objects for other products...
+      {
+        name: "Kurma Medjool Asli Palestina",
+        image: "1.png",
+        description:
+          "Kurma Medjool adalah salah satu jenis kurma premium terbaik yang telah dikenal di seluruh dunia.",
+        scent:
+          "Kurma Medjool yang kami jual bekerja sama dengan perusahaan Palestine Date Company salah satu perusahaan terbesar milik kaum muslimin di Jericho West Bank.",
+        longevity: "",
+        intensity: "",
+        notes: ["", "", ""],
+        variants: [
+          {
+            size: "500g",
+            price: "Rp 135.000",
+            shopeeLink:
+              "https://zawayakurma.orderonline.id/kurma-medjool-500gram",
+          },
+          {
+            size: "1kg",
+            price: "Rp 250.000",
+            shopeeLink: "https://zawayakurma.orderonline.id/kurma-medjool-1kg",
+          },
+        ],
+      },
+      {
+        name: "Oud Madawwy",
+        image: ".png",
+        description:
+          "Perpaduan aroma klasik yang mewah, menampilkan keanggunan sejati.",
+        scent: "Oriental, Spicy",
+        longevity: "10-12 Jam",
+        intensity: "Strong",
+        notes: [
+          "Top Notes: Saffron, Cardamom",
+          "Middle Notes: Rose, Oud",
+          "Base Notes: Vanilla, Sandalwood",
+        ],
+        variants: [
+          {
+            size: "3ml",
+            price: "Rp 180.000",
+            shopeeLink: "https://shopee.co.id/ula-classic-3ml",
+          },
+          {
+            size: "6ml",
+            price: "Rp 300.000",
+            shopeeLink: "https://shopee.co.id/ula-classic-6ml",
+          },
+        ],
+      },
+      {
+        name: "Kurma Shoidi",
+        image: "4.png",
+        description:
+          "Kurma Shoidi dikenal luas karena kualitasnya yang baik dan sering dikemas secara praktis, menjadikannya pilihan yang populer, terutama selama bulan Ramadan.",
+        scent:
+          "Saat banyak orang mencari kurma untuk berbuka puasa, Kurma Shoidi hadir sebagai solusi yang sempurna.",
+        longevity: "",
+        intensity: "",
+        notes: ["", "", ""],
+        variants: [
+          {
+            size: "400g",
+            price: "Rp 35.000",
+            shopeeLink: "https://zawayakurma.orderonline.id/kurma-shoidi-400g",
+          },
+          {
+            size: "1kg",
+            price: "Rp 60.000",
+            shopeeLink: "https://zawayakurma.orderonline.id/kurma-shoidi-1kg",
+          },
+        ],
+      },
+      {
+        name: "Kurma Ajwa",
+        image: "2.png",
+        description:
+          "Kurma Ajwa, yang juga dikenal sebagai Kurma Nabi, sangat istimewa bagi umat Muslim karena direkomendasikan langsung oleh Nabi Muhammad ﷺ.",
+        scent:
+          'Kurma ini menjadi pilihan favorit karena memiliki nilai sejarah dan manfaat kesehatan yang luar biasa. Nabi Muhammad ﷺ bersabda: "Barangsiapa mengonsumsi tujuh butir kurma Ajwa di pagi hari, maka pada hari itu ia tidak akan terkena racun maupun sihir." (HR. Bukhari dan Muslim).',
+        longevity: "",
+        intensity: "",
+        notes: ["", "", ""],
+        variants: [
+          {
+            size: "500g",
+            price: "Rp 160.000",
+            shopeeLink: "https://zawayakurma.orderonline.id/kurma-ajwa-500g",
+          },
+          {
+            size: "1kg",
+            price: "Rp 275.000",
+            shopeeLink: "https://zawayakurma.orderonline.id/kurma-ajwa-1kg",
+          },
+        ],
+      },
+      {
+        name: "Kurma Sukkari",
+        image: "3.png",
+        description:
+          "Kurma Sukkari, yang dikenal juga sebagai Kurma Raja, merupakan salah satu jenis kurma yang sangat populer dan berkualitas tinggi.",
+        scent:
+          "Kurma ini berasal dari Provinsi Al-Qasim, Arab Saudi, sehingga sering disebut sebagai Sukkari Al-Qasim.",
+        longevity: "",
+        intensity: "",
+        notes: ["", "", ""],
+        variants: [
+          {
+            size: "500g",
+            price: "Rp 55.000",
+            shopeeLink: "https://zawayakurma.orderonline.id/kurma-sukari-500g",
+          },
+          {
+            size: "1kg",
+            price: "Rp 85.000",
+            shopeeLink: "https://zawayakurma.orderonline.id/kurma-sukari-1kg",
+          },
+          {
+            size: "3kg",
+            price: "Rp 165.000",
+            shopeeLink: "https://zawayakurma.orderonline.id/kurma-sukari-3kg",
+          },
+        ],
+      },
+      {
+        name: "Alula Oud",
+        image: "5.png",
+        description: "Memadukan gaharu yang lembut dan elegan",
+        scent: "Oud, Vanilla, Amber, Versatile",
+        longevity: "10-12 Jam",
+        intensity: "Medium",
+        notes: [
+          "Top Notes: Vanilla",
+          "Middle Notes: Oud",
+          "Base Notes: Sandalwood",
+        ],
+        variants: [
+          {
+            size: "3ml",
+            price: "Rp 63.000",
+            shopeeLink: "https://shopee.co.id/ula-classic-3ml",
+          },
+          {
+            size: "6ml",
+            price: "Rp 98.000",
+            shopeeLink: "https://shopee.co.id/ula-classic-6ml",
+          },
+        ],
+      },
+      // Add similar objects for other products...
     ];
 
 function showModal(productName) {
