@@ -90,7 +90,7 @@ document.getElementById("menu-btn").addEventListener("click", () => {
           },
           {
             size: "500g free 2 ember shoidi",
-            price: "Rp 205.000",
+            price: "Rp 199.000",
             shopeeLink:
               "https://zawayakurma.orderonline.id/kurma-medjool-500g-free-2-ember-shoidi",
           },
