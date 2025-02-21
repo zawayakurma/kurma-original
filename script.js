@@ -73,7 +73,7 @@ document.getElementById("menu-btn").addEventListener("click", () => {
     const products = [
       {
         name: "Kurma Medjool Asli Palestina",
-        image: "1.png",
+        image: "promo1.png",
         description:
           "Kurma Medjool adalah salah satu jenis kurma premium terbaik yang telah dikenal di seluruh dunia.",
         scent:
@@ -87,6 +87,12 @@ document.getElementById("menu-btn").addEventListener("click", () => {
             price: "Rp 135.000",
             shopeeLink:
               "https://zawayakurma.orderonline.id/kurma-medjool-500gram",
+          },
+          {
+            size: "500g free 2 ember shoidi",
+            price: "Rp 205.000",
+            shopeeLink:
+              "https://zawayakurma.orderonline.id/kurma-medjool-500g-free-2-ember-shoidi",
           },
           {
             size: "1kg",
@@ -134,13 +140,15 @@ document.getElementById("menu-btn").addEventListener("click", () => {
         variants: [
           {
             size: "400g",
-            price: "Rp 35.000",
-            shopeeLink: "https://zawayakurma.orderonline.id/kurma-shoidi-400g",
+            price: "Rp 70.000",
+            shopeeLink:
+              "https://zawayakurma.orderonline.id/kurma-shoidi-400g-ramadhan",
           },
           {
             size: "1kg",
-            price: "Rp 60.000",
-            shopeeLink: "https://zawayakurma.orderonline.id/kurma-shoidi-1kg",
+            price: "Rp 99.000",
+            shopeeLink:
+              "https://zawayakurma.orderonline.id/kurma-shoidi-1kg-ramadhan",
           },
         ],
       },
