@@ -83,12 +83,6 @@ document.getElementById("menu-btn").addEventListener("click", () => {
         notes: ["", "", ""],
         variants: [
           {
-            size: "500g",
-            price: "Rp 135.000",
-            shopeeLink:
-              "https://zawayakurma.orderonline.id/kurma-medjool-500gram",
-          },
-          {
             size: "500g free 2 ember shoidi",
             price: "Rp 199.000",
             shopeeLink:
